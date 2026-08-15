@@ -43,8 +43,8 @@ function Contactos() {
             <p className="eyebrow">Onde nos encontra</p>
             <ul className="mt-8 space-y-6 text-sm">
               {[
-                { Icon: Mail, label: "Email", value: "geral@laser4y.pt" },
-                { Icon: Phone, label: "Telefone", value: "+351 910 000 000" },
+                { Icon: Mail, label: "Email", value: "laser4y.me@gmail.com" },
+                { Icon: Phone, label: "Telefone", value: "+351 916 135 978" },
                 { Icon: MapPin, label: "Oficina", value: "Portugal · visitas por marcação" },
                 { Icon: Clock, label: "Horário", value: "Seg a Sex · 09h00 – 18h00" },
               ].map(({ Icon, label, value }) => (

@@ -14,6 +14,7 @@ import { Route as ContactosRouteImport } from './routes/contactos'
 import { Route as EquipaRouteImport } from './routes/equipa'
 import { Route as RegistoRouteImport } from './routes/registo'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TestemunhosRouteImport } from './routes/testemunhos'
 
@@ -42,6 +43,11 @@ const ServicosRoute = ServicosRouteImport.update({
   path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/equipa': typeof EquipaRoute
   '/registo': typeof RegistoRoute
   '/servicos': typeof ServicosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/equipa': typeof EquipaRoute
   '/registo': typeof RegistoRoute
   '/servicos': typeof ServicosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/equipa': typeof EquipaRoute
   '/registo': typeof RegistoRoute
   '/servicos': typeof ServicosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/equipa'
     | '/registo'
     | '/servicos'
+    | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/equipa'
     | '/registo'
     | '/servicos'
+    | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/equipa'
     | '/registo'
     | '/servicos'
+    | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   EquipaRoute: typeof EquipaRoute
   RegistoRoute: typeof RegistoRoute
   ServicosRoute: typeof ServicosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   TestemunhosRoute: typeof TestemunhosRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   EquipaRoute: EquipaRoute,
   RegistoRoute: RegistoRoute,
   ServicosRoute: ServicosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   TestemunhosRoute: TestemunhosRoute,
 }

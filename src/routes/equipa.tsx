@@ -61,7 +61,7 @@ function Equipa() {
             <h2 className="mt-4 text-3xl sm:text-4xl">Junte-se à oficina</h2>
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
               Procuramos pessoas curiosas por fabrico digital, design e automação. Envie o seu
-              portefólio para <span className="text-primary">geral@laser4y.pt</span>.
+              portefólio para <span className="text-primary">laser4y.me@gmail.com</span>.
             </p>
           </div>
         </section>
