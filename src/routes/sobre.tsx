@@ -45,7 +45,7 @@ function Sobre() {
           />
           <div>
             <p className="eyebrow">História</p>
-            <h2 className="mt-4 text-3xl sm:text-4xl">Da ideia inicial ao produto final</h2>
+            <h2 className="mt-4 text-3xl sm:text-4xl text-lowercase">da ideia inicial ao produto final</h2>
             <div className="mt-6 space-y-5 text-sm leading-relaxed text-muted-foreground">
               <p>
                 Combinando impressão 3D, corte e gravação a laser, engenharia, design digital e
@@ -72,7 +72,7 @@ function Sobre() {
               {[
                 ["Madeira", "Contraplacado, MDF, faia e nogueira para gravação de alto contraste."],
                 ["Acrílico", "Cortes limpos com aresta polida, transparente ou colorido."],
-                ["Metal", "Marcação permanente em inox, alumínio e latão."],
+                ["Metal", "Marcação permanente em metais pintados."],
               ].map(([t, d]) => (
                 <div key={t} className="border border-border/70 bg-card p-8">
                   <h3 className="font-display text-lg text-primary">{t}</h3>
