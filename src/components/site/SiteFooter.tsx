@@ -19,7 +19,7 @@ export function SiteFooter() {
             {[
               { href: "https://facebook.com/Laser4y", Icon: Facebook, label: "Facebook" },
               { href: "https://instagram.com/Laser4y", Icon: Instagram, label: "Instagram" },
-              { href: "https://www.linkedin.com/company/laser4y", Icon: Linkedin, label: "LinkedIn" },
+              { href: "https://www.linkedin.com/in/laser4y/", Icon: Linkedin, label: "LinkedIn" },
             ].map(({ href, Icon, label }) => (
               <a
                 key={label}
