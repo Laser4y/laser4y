@@ -58,10 +58,10 @@ export function SiteFooter() {
           <h3 className="eyebrow">Contactos</h3>
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
             <li className="flex items-center gap-3">
-              <Mail className="size-4 text-primary" /> geral@laser4y.pt
+              <Mail className="size-4 text-primary" /> laser4y.me@gmail.com
             </li>
             <li className="flex items-center gap-3">
-              <Phone className="size-4 text-primary" /> +351 910 000 000
+              <Phone className="size-4 text-primary" /> +351 916135978
             </li>
             <li className="flex items-center gap-3">
               <MapPin className="size-4 text-primary" /> Portugal

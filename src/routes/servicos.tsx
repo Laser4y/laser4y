@@ -34,7 +34,7 @@ const services = [
       "Sinalética e placas corporativas",
       "Troféus, prémios e lembranças",
       "Decoração de interiores e peças de design",
-      "Marcação permanente em metal",
+      "Marcação permanente em metal pintado",
       "Prototipagem em corte plano",
     ],
   },
@@ -45,7 +45,7 @@ const services = [
     items: [
       "Canecas, garrafas e termos",
       "T-shirts, sweats e bonés",
-      "Placas de alumínio e azulejos",
+      
       "Brindes corporativos e merchandising",
       "Séries pequenas ou peças únicas",
     ],
@@ -53,7 +53,7 @@ const services = [
   {
     img: svc3d,
     title: "Impressão 3D",
-    lead: "Do protótipo funcional à peça final, em FDM e resina de alta definição.",
+    lead: "Do protótipo funcional à peça final, em FDM de alta definição.",
     items: [
       "Protótipos e provas de conceito",
       "Peças técnicas e de substituição",
