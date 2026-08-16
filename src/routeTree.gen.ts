@@ -17,6 +17,7 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TestemunhosRouteImport } from './routes/testemunhos'
+import { Route as ApiPublicProdutoImagemSplatRouteImport } from './routes/api/public/produto-imagem/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,12 @@ const TestemunhosRoute = TestemunhosRouteImport.update({
   path: '/testemunhos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicProdutoImagemSplatRoute =
+  ApiPublicProdutoImagemSplatRouteImport.update({
+    id: '/api/public/produto-imagem/$',
+    path: '/api/public/produto-imagem/$',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
+  '/api/public/produto-imagem/$': typeof ApiPublicProdutoImagemSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +86,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
+  '/api/public/produto-imagem/$': typeof ApiPublicProdutoImagemSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +98,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
+  '/api/public/produto-imagem/$': typeof ApiPublicProdutoImagemSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
+    | '/api/public/produto-imagem/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
+    | '/api/public/produto-imagem/$'
   id:
     | '__root__'
     | '/'
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
+    | '/api/public/produto-imagem/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +145,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   TestemunhosRoute: typeof TestemunhosRoute
+  ApiPublicProdutoImagemSplatRoute: typeof ApiPublicProdutoImagemSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestemunhosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/produto-imagem/$': {
+      id: '/api/public/produto-imagem/$'
+      path: '/api/public/produto-imagem/$'
+      fullPath: '/api/public/produto-imagem/$'
+      preLoaderRoute: typeof ApiPublicProdutoImagemSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +225,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   TestemunhosRoute: TestemunhosRoute,
+  ApiPublicProdutoImagemSplatRoute: ApiPublicProdutoImagemSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
