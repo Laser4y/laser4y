@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactosRouteImport } from './routes/contactos'
 import { Route as EquipaRouteImport } from './routes/equipa'
@@ -18,11 +19,16 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TestemunhosRouteImport } from './routes/testemunhos'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ApiPublicProdutoImagemSplatRouteImport } from './routes/api/public/produto-imagem/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -65,6 +71,11 @@ const TestemunhosRoute = TestemunhosRouteImport.update({
   path: '/testemunhos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiPublicProdutoImagemSplatRoute =
   ApiPublicProdutoImagemSplatRouteImport.update({
     id: '/api/public/produto-imagem/$',
@@ -82,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/produto-imagem/$': typeof ApiPublicProdutoImagemSplatRoute
 }
 export interface FileRoutesByTo {
@@ -94,11 +106,13 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/produto-imagem/$': typeof ApiPublicProdutoImagemSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/contactos': typeof ContactosRoute
   '/equipa': typeof EquipaRoute
@@ -107,6 +121,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/testemunhos': typeof TestemunhosRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/api/public/produto-imagem/$': typeof ApiPublicProdutoImagemSplatRoute
 }
 export interface FileRouteTypes {
@@ -121,6 +136,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
+    | '/admin'
     | '/api/public/produto-imagem/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -133,10 +149,12 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
+    | '/admin'
     | '/api/public/produto-imagem/$'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/auth'
     | '/contactos'
     | '/equipa'
@@ -145,11 +163,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/testemunhos'
+    | '/_authenticated/admin'
     | '/api/public/produto-imagem/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactosRoute: typeof ContactosRoute
   EquipaRoute: typeof EquipaRoute
@@ -168,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -226,6 +253,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestemunhosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/produto-imagem/$': {
       id: '/api/public/produto-imagem/$'
       path: '/api/public/produto-imagem/$'
@@ -236,8 +270,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactosRoute: ContactosRoute,
   EquipaRoute: EquipaRoute,
