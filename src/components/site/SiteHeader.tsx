@@ -99,7 +99,12 @@ export function SiteHeader() {
 
       {open && (
         <nav className="flex flex-col gap-1 border-t border-border/60 px-5 pb-6 pt-3 lg:hidden">
-          {[...nav, { to: "/registo", label: "Registo" } as const].map((item) => (
+          {[
+            ...nav,
+            ...(user ? [] : [{ to: "/registo", label: "Registo" } as const]),
+            ...(isAdmin ? [{ to: "/admin", label: "Admin" } as const] : []),
+            ...(user ? [] : [{ to: "/auth", label: "Entrar" } as const]),
+          ].map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -109,6 +114,15 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          {user && (
+            <button
+              type="button"
+              onClick={signOut}
+              className="py-2.5 text-left font-display text-xs uppercase tracking-[0.2em] text-primary"
+            >
+              Sair
+            </button>
+          )}
         </nav>
       )}
     </header>
