@@ -30,6 +30,7 @@ export const Route = createFileRoute("/servicos")({
 
 const services = [
   {
+    slug: "laser",
     img: svcLaser,
     title: "Corte & Gravação a Laser",
     lead: "Precisão milimétrica em madeira, acrílico, metal, couro e vidro.",
