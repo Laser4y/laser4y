@@ -1,6 +1,9 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Menu, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/useAuth";
 import logo from "@/assets/laser4y-logo.png.asset.json";
 
 const nav = [
@@ -14,6 +17,18 @@ const nav = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+
+  async function signOut() {
+    setOpen(false);
+    await qc.cancelQueries();
+    qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -39,12 +54,38 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/registo"
-            className="hidden rounded-sm border border-primary/60 px-5 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
-          >
-            Registo
-          </Link>
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="hidden rounded-sm px-3 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary sm:inline-flex"
+            >
+              Admin
+            </Link>
+          )}
+          {user ? (
+            <button
+              type="button"
+              onClick={signOut}
+              className="hidden rounded-sm border border-primary/60 px-5 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+            >
+              Sair
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/auth"
+                className="hidden px-3 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary sm:inline-flex"
+              >
+                Entrar
+              </Link>
+              <Link
+                to="/registo"
+                className="hidden rounded-sm border border-primary/60 px-5 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+              >
+                Registo
+              </Link>
+            </>
+          )}
           <button
             type="button"
             aria-label="Abrir menu"
@@ -58,7 +99,12 @@ export function SiteHeader() {
 
       {open && (
         <nav className="flex flex-col gap-1 border-t border-border/60 px-5 pb-6 pt-3 lg:hidden">
-          {[...nav, { to: "/registo", label: "Registo" } as const].map((item) => (
+          {[
+            ...nav,
+            ...(user ? [] : [{ to: "/registo", label: "Registo" } as const]),
+            ...(isAdmin ? [{ to: "/admin", label: "Admin" } as const] : []),
+            ...(user ? [] : [{ to: "/auth", label: "Entrar" } as const]),
+          ].map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -68,6 +114,15 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          {user && (
+            <button
+              type="button"
+              onClick={signOut}
+              className="py-2.5 text-left font-display text-xs uppercase tracking-[0.2em] text-primary"
+            >
+              Sair
+            </button>
+          )}
         </nav>
       )}
     </header>
