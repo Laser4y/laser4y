@@ -56,6 +56,7 @@ const services = [
     ],
   },
   {
+    slug: "impressao3d",
     img: svc3d,
     title: "Impressão 3D",
     lead: "Do protótipo funcional à peça final, em FDM de alta definição.",
