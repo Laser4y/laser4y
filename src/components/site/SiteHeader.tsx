@@ -54,12 +54,38 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/registo"
-            className="hidden rounded-sm border border-primary/60 px-5 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
-          >
-            Registo
-          </Link>
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="hidden rounded-sm px-3 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary sm:inline-flex"
+            >
+              Admin
+            </Link>
+          )}
+          {user ? (
+            <button
+              type="button"
+              onClick={signOut}
+              className="hidden rounded-sm border border-primary/60 px-5 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+            >
+              Sair
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/auth"
+                className="hidden px-3 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary sm:inline-flex"
+              >
+                Entrar
+              </Link>
+              <Link
+                to="/registo"
+                className="hidden rounded-sm border border-primary/60 px-5 py-2.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+              >
+                Registo
+              </Link>
+            </>
+          )}
           <button
             type="button"
             aria-label="Abrir menu"
