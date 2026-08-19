@@ -71,6 +71,20 @@ const services = [
 ];
 
 function Servicos() {
+  const products = useQuery({
+    queryKey: ["products", "published"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("products")
+        .select("id, service, title, description, price, image_path, sort_order")
+        .eq("published", true)
+        .order("sort_order")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
   return (
     <div className="min-h-screen">
       <SiteHeader />
