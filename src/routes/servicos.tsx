@@ -96,34 +96,80 @@ function Servicos() {
         />
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          {services.map((s, i) => (
-            <section
-              key={s.title}
-              className="grid gap-12 border-b border-border/60 py-20 lg:grid-cols-2 lg:items-center"
-            >
-              <img
-                src={s.img}
-                alt={s.title}
-                width={900}
-                height={700}
-                loading="lazy"
-                className={`w-full border border-border/70 object-cover ${i % 2 ? "lg:order-2" : ""}`}
-              />
-              <div>
-                <p className="eyebrow">0{i + 1}</p>
-                <h2 className="mt-4 text-3xl sm:text-4xl">{s.title}</h2>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.lead}</p>
-                <ul className="mt-8 space-y-3">
-                  {s.items.map((it) => (
-                    <li key={it} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <span className="mt-2 size-1.5 shrink-0 bg-primary" />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          ))}
+          {services.map((s, i) => {
+            const items = (products.data ?? []).filter((p) => p.service === s.slug);
+            return (
+              <section key={s.title} className="border-b border-border/60 py-20">
+                <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    width={900}
+                    height={700}
+                    loading="lazy"
+                    className={`w-full border border-border/70 object-cover ${i % 2 ? "lg:order-2" : ""}`}
+                  />
+                  <div>
+                    <p className="eyebrow">0{i + 1}</p>
+                    <h2 className="mt-4 text-3xl sm:text-4xl">{s.title}</h2>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.lead}</p>
+                    <ul className="mt-8 space-y-3">
+                      {s.items.map((it) => (
+                        <li
+                          key={it}
+                          className="flex items-start gap-3 text-sm text-muted-foreground"
+                        >
+                          <span className="mt-2 size-1.5 shrink-0 bg-primary" />
+                          {it}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {items.length > 0 && (
+                  <div className="mt-16">
+                    <p className="eyebrow">Produtos {s.title}</p>
+                    <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                      {items.map((p) => {
+                        const url = productImageUrl(p.image_path);
+                        return (
+                          <article
+                            key={p.id}
+                            className="border border-border/70 bg-card transition-colors hover:border-primary/50"
+                          >
+                            {url && (
+                              <img
+                                src={url}
+                                alt={p.title}
+                                loading="lazy"
+                                className="aspect-square w-full object-cover"
+                              />
+                            )}
+                            <div className="p-6">
+                              <h3 className="font-display text-sm uppercase tracking-[0.14em]">
+                                {p.title}
+                              </h3>
+                              {p.description && (
+                                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                                  {p.description}
+                                </p>
+                              )}
+                              {p.price && (
+                                <p className="mt-4 font-display text-sm text-gold-gradient">
+                                  {p.price}
+                                </p>
+                              )}
+                            </div>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div>
 
         <section className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
