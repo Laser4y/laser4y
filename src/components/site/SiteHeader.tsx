@@ -17,6 +17,18 @@ const nav = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+
+  async function signOut() {
+    setOpen(false);
+    await qc.cancelQueries();
+    qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
