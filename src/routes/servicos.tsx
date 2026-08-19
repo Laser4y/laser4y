@@ -43,6 +43,7 @@ const services = [
     ],
   },
   {
+    slug: "sublimacao",
     img: svcSub,
     title: "Sublimação",
     lead: "Cor total, permanente e resistente à lavagem em suportes têxteis e rígidos.",
