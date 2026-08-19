@@ -25,8 +25,6 @@ export const Route = createFileRoute("/equipa")({
 const team = [
   { initials: "PF", name: "Paulo Ferreira", role: "Fundador & Produção Laser", bio: "Responsável pela operação das máquinas e pelo controlo de qualidade final." },
   { initials: "FV", name: "Filipa Victorio", role: "FUNDADOR & PRODUÇÃO LASER", bio: "Transforma esboços e briefings em ficheiros vetoriais prontos a produzir." },
-  { initials: "PR", name: "Pedro Rocha", role: "Engenharia & Impressão 3D", bio: "Modelação CAD, prototipagem funcional e validação de peças técnicas." },
-  { initials: "AF", name: "Ana Ferreira", role: "Sublimação & Acabamentos", bio: "Garante cor fiel, alinhamento e durabilidade em cada suporte." },
 ];
 
 function Equipa() {
